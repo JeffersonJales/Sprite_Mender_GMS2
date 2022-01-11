@@ -1,0 +1,43 @@
+PROBLEMA 
+1 Combinar vários sprites em um só
+2 Contemplar animação
+3 Fazer isso de forma rápida 
+	
+Bônus 
+4 Exportar sprites combinados
+
+SOLUÇÕES
+1 Desenhar sprites na ordem desejada -> sprite_mender_create(arr_sprite)
+2 Uma surface por sub_imagem e depois usar o sprite_merge.
+
+3 Cache de partes em buffer  
+3 Cache de sprites gerados ->	DS_MAP	->	sprite_inicial :	{
+																															ListaPossibilidades : [ 
+																																{
+																																	lista_sprites : [spr_2, spr_3, spr_4],
+																																	sprite_gerado : 2,
+																																},
+																																
+																																	lista_sprites : [spr_3, spr_4, spr_2],
+																																	sprite_gerado : 3,
+																															]	
+																														}
+																														
+3 Possibilidade de popular esse banco de antemão antes do jogo começar
+3 Geração dividida em frames	
+	
+Funções
+- sprite_mender_create([SPRs]) -> Recebe array de sprites para gerar um sprite. Desenhar na ordem que recebe.
+															 -> Verificar se já existe tal combinação no cache antes de gerar. 
+															 -> Enquanto estiver gerando partes, verificar se parte já está em buffer. Se não tiver, colocar.
+															 -> retorna o sprite gerado.
+
+- sprite_mender_get_sprites() -> Retorna array com sprites gerados pelo mender_create
+- sprite_mender_clear()				-> Limpar todos os sprites gerados pelo sprite_mender_create. 
+
+- sprite_mender_cache_add() -> Coloca em cache (buffer) um sprite -> Criar surface e salvar em buffer.
+- sprite_mender_destroy()		-> Limpa todo o sistema.
+
+4 - Bonus
+- sprite_mender_generate_all() -> Salva os sprites gerados na sessão 
+- sprite_mender_generate(spr)	 -> Salva o sprite 
